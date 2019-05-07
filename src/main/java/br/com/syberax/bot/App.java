@@ -13,11 +13,6 @@ import com.pengrad.telegrambot.response.BaseResponse;
 import com.pengrad.telegrambot.response.GetUpdatesResponse;
 import com.pengrad.telegrambot.response.SendResponse;
 
-
-/**
- * Hello world!
- *
- */
 public class App {
 	private static String strRetorno;
 
@@ -25,7 +20,7 @@ public class App {
 		System.out.println("Hello World!");
 
 		// Criação do objeto bot com as informações de acesso
-		TelegramBot bot = TelegramBotAdapter.build("711218070:AAFCMEdGA1QD6BN7LwNCGnQ4pAdbaEKT-zk");
+		TelegramBot bot = new TelegramBot("711218070:AAFCMEdGA1QD6BN7LwNCGnQ4pAdbaEKT-zk");
 
 		// objeto responsável por receber as mensagens
 		GetUpdatesResponse updatesResponse;
@@ -55,13 +50,12 @@ public class App {
 				m = update.updateId() + 1;
 
 				System.out.println("Recebendo mensagem:" + update.message().text());
-				
-				if(update.message().text().equals("Syberax")) {
+
+				if (update.message().text().equals("Syberax")) {
 					strRetorno = "Esse é o meu nome";
 				} else {
 					strRetorno = "Não entendi... você disse " + update.message().text();
 				}
-				
 
 				// envio de "Escrevendo" antes de enviar a resposta
 				baseResponse = bot.execute(new SendChatAction(update.message().chat().id(), ChatAction.typing.name()));
@@ -71,7 +65,7 @@ public class App {
 
 				// envio da mensagem de resposta
 				sendResponse = bot.execute(new SendMessage(update.message().chat().id(), strRetorno));
-				
+
 				// verificação de mensagem enviada com sucesso
 				System.out.println("Mensagem Enviada?" + sendResponse.isOk());
 
